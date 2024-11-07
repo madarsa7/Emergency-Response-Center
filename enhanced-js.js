@@ -1,10 +1,10 @@
 const API_URL = 'http://localhost:5000/api';
 
-// State Management
+
 let emergencies = [];
 let currentFilter = 'all';
 
-// DOM Elements
+
 const form = document.getElementById('emergencyForm');
 const emergenciesDiv = document.getElementById('emergencies');
 const themeToggle = document.getElementById('themeToggle');
@@ -33,7 +33,7 @@ function updateClock() {
 setInterval(updateClock, 1000);
 updateClock();
 
-// Get Emergency Icon
+
 function getEmergencyIcon(type) {
     const icons = {
         'Medical': '🚑',
@@ -45,7 +45,7 @@ function getEmergencyIcon(type) {
     return icons[type] || '⚠️';
 }
 
-// Get Priority Badge
+
 function getPriorityBadge(priority) {
     const badges = {
         'High': 'bg-danger',
@@ -55,13 +55,11 @@ function getPriorityBadge(priority) {
     return badges[priority] || 'bg-secondary';
 }
 
-// Render Active Emergencies by Priority
-// Render Active Emergencies by Priority, excluding resolved emergencies
-// Render Active Emergencies by Priority (Pending Only)
+
 function renderActiveEmergencies() {
     const priorityLevels = ['High', 'Medium', 'Low'];
     
-    // Filter only active (pending) emergencies
+   
     const activeEmergencies = emergencies.filter(e => e.status === 'pending');
     
     emergenciesDiv.innerHTML = priorityLevels.map(level => {
@@ -95,7 +93,7 @@ function renderActiveEmergencies() {
     }).join('');
 }
 
-// Render Resolved Emergencies
+
 function renderResolvedEmergencies() {
     const resolvedEmergencies = emergencies.filter(e => e.status === 'resolved');
     
@@ -118,13 +116,13 @@ function renderResolvedEmergencies() {
     `).join('');
 }
 
-// Render both Active and Resolved Emergencies
+
 function renderEmergencies() {
     renderActiveEmergencies();
     renderResolvedEmergencies();
 }
 
-// Modify the resolve function to refresh the display
+
 async function resolveEmergency(id) {
     if (confirm('Are you sure you want to mark this emergency as resolved?')) {
         try {
@@ -137,14 +135,14 @@ async function resolveEmergency(id) {
             if (!response.ok) throw new Error('Failed to resolve emergency');
 
             showNotification('Emergency marked as resolved!', 'success');
-            fetchEmergencies(); // Refresh list to reflect resolved items
+            fetchEmergencies(); 
         } catch (error) {
             showNotification('Failed to resolve emergency', 'danger');
         }
     }
 }
 
-// Fetch and Update Emergencies and Stats
+
 async function fetchEmergencies() {
     try {
         const response = await fetch(`${API_URL}/emergencies`);
@@ -156,8 +154,6 @@ async function fetchEmergencies() {
 }
 
 
-
-// Form Submission with Validation
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -194,7 +190,6 @@ form.addEventListener('submit', async (e) => {
     }
 });
 
-// Resolve Emergency
 async function resolveEmergency(id) {
     if (confirm('Are you sure you want to mark this emergency as resolved?')) {
         try {
@@ -217,22 +212,20 @@ async function resolveEmergency(id) {
     }
 }
 
-// Filter Emergencies
+
 async function filterEmergencies(priority) {
-    currentFilter = priority;  // Update the current filter for UI purposes
+    currentFilter = priority; 
     try {
-        // Add priority as a query parameter if it's specified
+        
         const queryParams = priority === 'all' ? '' : `?priority=${priority}`;
         const response = await fetch(`${API_URL}/emergencies${queryParams}`);
         emergencies = await response.json();
-        renderEmergencies(); // Refresh the display based on filtered data
+        renderEmergencies(); 
     } catch (error) {
         showNotification('Failed to filter emergencies', 'danger');
     }
 }
 
-
-// Fetch and Update Emergencies and Stats
 async function fetchEmergencies() {
     try {
         const response = await fetch(`${API_URL}/emergencies`);
@@ -255,7 +248,6 @@ async function fetchStats() {
     }
 }
 
-// Initialize the application
 document.addEventListener('DOMContentLoaded', () => {
     fetchEmergencies();
     fetchStats();
