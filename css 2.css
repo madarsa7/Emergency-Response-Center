@@ -1,6 +1,6 @@
-/* Variables */
+
 :root {
-    /* New muted color palette */
+    
     --primary-color: #2c3e50;      /* Dark blue-gray */
     --secondary-color: #95a5a6;    /* Light gray */
     --success-color: #27ae60;      /* Muted green */
@@ -14,7 +14,7 @@
     --card-border: #dcdde1;       /* Border color */
 }
 
-/* Base Styles */
+
 html {
     scroll-behavior: smooth;
 }
@@ -24,7 +24,7 @@ body {
     background-color: var(--light-bg);
 }
 
-/* Dark Mode Styles */
+
 body.dark {
     background-color: var(--dark-bg);
     color: var(--dark-text);
@@ -41,7 +41,6 @@ body.dark .list-group-item {
     color: var(--dark-text);
 }
 
-/* Navbar Styles */
 .navbar.bg-danger {
     background-color: var(--primary-color) !important;
 }
@@ -101,7 +100,7 @@ body.dark .contact-card {
     transform: translateY(-3px);
 }
 
-/* Override Bootstrap Card Colors */
+
 .bg-primary {
     background-color: var(--primary-color) !important;
 }
