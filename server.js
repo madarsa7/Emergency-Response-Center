@@ -70,8 +70,7 @@ app.get('/api/emergencies', async (req, res) => {
         
         
         
-        const startOfDay = new Date();
-        startOfDay.setHours(0, 0, 0, 0);
+       
 
         const emergencies = await Emergency.find({
             $or: [
